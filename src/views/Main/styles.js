@@ -5,6 +5,13 @@ const MainWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 30px;
+  h1 {
+    color: #f878ad;
+  }
+  .pony {
+    max-width: 400px;
+    width: 90%;
+  }
 `
 
 export default MainWrapper

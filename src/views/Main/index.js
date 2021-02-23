@@ -4,6 +4,7 @@ import { Button, CssBaseline } from '@material-ui/core';
 import NewClassForm from '../../components/NewClassForm'
 import ClassesList from '../../components/ClassesList'
 import MainWrapper from './styles'
+import Pony from '../../assets/pony.png'
 
 const {
   REACT_APP_apiKey,
@@ -51,13 +52,12 @@ function Main({ admin }) {
     classesListRef.remove();
   }
 
-  console.log({ admin })
-
   return (
     <>
       <CssBaseline />
       <MainWrapper>
-        <h2>Clases del día</h2>
+        {!admin && <img src={Pony} className="pony" alt=""/>}
+        <h1>Clases del día</h1>
         <ClassesList classes={classes} removeClass={removeClass} admin={admin} />
         {admin && (
           <>
