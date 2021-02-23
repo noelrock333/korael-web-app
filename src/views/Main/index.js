@@ -26,8 +26,8 @@ firebase.initializeApp({
 })
 const database = firebase.database();
 
-function App() {
-  let [classes, setClasses] = useState([])
+function Main({ admin }) {
+  let [classes, setClasses] = useState(null)
   let [showForm, setShowForm] = useState(false)
 
   useEffect(() => {
@@ -51,20 +51,27 @@ function App() {
     classesListRef.remove();
   }
 
+  console.log({ admin })
+
   return (
     <>
       <CssBaseline />
       <MainWrapper>
-        <ClassesList classes={classes} removeClass={removeClass} />
-        {showForm && <NewClassForm onSubmit={handleSubmit} cancel={() => setShowForm(false)} />}
-        {!showForm && (
-          <Button onClick={() => setShowForm(true)} color="primary" variant="contained">
-            Agregar clase
-          </Button>
+        <h2>Clases del día</h2>
+        <ClassesList classes={classes} removeClass={removeClass} admin={admin} />
+        {admin && (
+          <>
+            {showForm && <NewClassForm onSubmit={handleSubmit} cancel={() => setShowForm(false)} />}
+            {!showForm && (
+              <Button onClick={() => setShowForm(true)} color="primary" variant="contained">
+                Agregar clase
+              </Button>
+            )}
+          </>  
         )}
       </MainWrapper>
     </>
   );
 }
 
-export default App;
+export default Main;

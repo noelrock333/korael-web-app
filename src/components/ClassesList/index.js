@@ -2,10 +2,10 @@ import ClassesListWrapper, { Row, Column } from './styles'
 import { Button } from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
 
-const ClassesList = ({ classes, removeClass }) => {
+const ClassesList = ({ classes, removeClass, admin }) => {
   return (
     <ClassesListWrapper>
-      {classes && Object.keys(classes)?.map((key) => (
+      {classes ? Object.keys(classes)?.map((key) => (
         <Row key={key}>
           <Column>
             <label htmlFor="">{classes[key].name}: </label>
@@ -13,13 +13,15 @@ const ClassesList = ({ classes, removeClass }) => {
           <Column>
             <a href={classes[key].link} target="_blank" rel="noreferrer">{classes[key].link}</a>
           </Column>
-          <Column>
+          {admin && <Column>
             <Button onClick={() => removeClass(key)}>
               <DeleteIcon />
             </Button>
-          </Column>
+          </Column>}
         </Row>
-      ))}
+      )) : (
+        <h3>No hay clases para mostrar</h3>
+      )}
     </ClassesListWrapper>
   )
 }
